@@ -1,6 +1,6 @@
 # data-pipeline
 A repository of sample code to conceptualize a cloud-based data pipeline.
-The primary puprose of this repository is to provide sample code for implementating a data pipeline to ingest, tranform and curate data into a data lake for BI reporting and analytics consumption using the Amazon Web Services (AWS) cloud.
+The primary puprose of this repository is to provide sample code for implementating a data pipeline to ingest, tranform and curate data into a data lake for BI reporting and analytics consumption using the Amazon Web Services (AWS) native services.
 
 
 
