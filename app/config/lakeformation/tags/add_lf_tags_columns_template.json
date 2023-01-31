@@ -1,0 +1,15 @@
+{
+    "Resource": {
+        "TableWithColumns": {
+                "DatabaseName": "${DB_NAME}",
+                "Name": "${TABLE_NAME}",
+                "ColumnNames": ${COLUMN_NAMES}
+        }
+    },
+    "LFTags": [
+        {
+            "TagKey": "${LF_TAG_KEY}",
+            "TagValues": ${LF_TAG_VALUE}
+        }
+    ]
+}
