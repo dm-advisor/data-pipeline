@@ -1,0 +1,14 @@
+{
+    "Resource": {
+        "Table": {
+            "DatabaseName": "${DB_NAME}",
+            "Name": "${TABLE_NAME}"
+        }
+    },
+    "LFTags": [
+        {
+            "TagKey": "${LF_TAG_KEY}",
+            "TagValues": ${LF_TAG_VALUE}
+        }
+    ]
+}
