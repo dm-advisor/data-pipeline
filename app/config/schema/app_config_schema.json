@@ -1,0 +1,128 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "_comment": {
+      "type": "string"
+    },
+    "database": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "include_env_suffix": {
+          "type": "string",
+          "enum": ["true","false"]
+        },
+        "location": {
+          "type": "object",
+          "properties": {
+            "s3_label": {
+              "type": "string"
+            },
+            "s3_path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "s3_label",
+            "s3_path"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "classification": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "include_env_suffix",
+        "description",
+        "classification",
+        "owner"
+      ]
+    },
+    "athena_tables": {
+      "type": "array",
+      "minItems": 1,
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "table_name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "script_name": {
+              "type": "string"
+            },
+            "table_folder": {
+              "type": "string"
+            },
+            "sql_folder1": {
+              "type": "string"
+            },
+            "sql_folder2": {
+              "type": "string"
+            },
+            "temp_folder": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            },
+            "location_dir": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "table_name",
+            "description",
+            "script_name",
+            "table_folder",
+            "sql_folder1",
+            "sql_folder2",
+            "temp_folder",
+            "label",
+            "location_dir"
+          ]
+        }
+      ]
+    },
+    "folders": {
+      "type": "array",
+      "minItems": 0,
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "folder_name": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "folder_name",
+            "label"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "_comment",
+    "database",
+    "athena_tables",
+    "folders"
+  ]
+}
