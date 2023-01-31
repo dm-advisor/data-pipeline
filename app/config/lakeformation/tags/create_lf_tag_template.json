@@ -1,0 +1,5 @@
+{
+    "CatalogId": "${ACCOUNT}",
+    "TagKey": "${TAG_KEY}",
+    "TagValues": ${TAG_VALUES}
+}
