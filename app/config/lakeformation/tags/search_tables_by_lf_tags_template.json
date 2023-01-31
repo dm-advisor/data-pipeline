@@ -1,0 +1,18 @@
+{
+    "NextToken": "",
+    "MaxResults": 1000,
+    "Expression": [
+        {
+            "TagKey": "${TAG_KEY1}",
+            "TagValues": ${TAG_VALUES1}
+        },
+        {
+            "TagKey": "${TAG_KEY2}",
+            "TagValues": ${TAG_VALUES2}
+        },
+        {
+            "TagKey": "${TAG_KEY3}",
+            "TagValues": ${TAG_VALUES3}
+        }
+    ]
+}
