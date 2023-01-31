@@ -1,0 +1,538 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Schema for AWS Lake Formation permissions configuration file",
+  "type": "object",
+  "properties": {
+    "database": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "include_env_suffix": {
+          "type": "string",
+          "enum": ["true","false"]
+        },
+        "description": {
+          "type": "string"
+        },
+        "classification": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "include_env_suffix",
+        "description",
+        "classification",
+        "owner"
+      ]
+    },
+    "grants": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "table": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "bucket_label": {
+                      "type": "string"
+                    },
+                    "sensitivity": {
+                      "type": "array",
+                      "minItems": 1,
+                      "maxItems": 1,
+                      "uniqueItems": true,
+                      "items": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "high": {
+                              "type": "array",
+                              "items": {}
+                            },
+                            "medium": {
+                              "type": "array",
+                              "items": {}
+                            },
+                            "low": {
+                              "type": "array",
+                              "items": {}
+                            }
+                          },
+                          "required": [
+                            "high",
+                            "medium",
+                            "low"
+                          ]
+                        }
+                      ]
+                    },
+                    "policy": {
+                      "type": "array",
+                      "minItems": 1,
+                      "uniqueItems": true,
+                      "items": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "roles": {
+                              "type": "array",
+                              "minItems": 1,
+                              "uniqueItems": false,
+                              "items": [
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "role": {
+                                      "type": "object",
+                                      "properties": {
+                                        "label": {
+                                          "type": "string"
+                                        },
+                                        "permissions": {
+                                          "type": "object",
+                                          "properties": {
+                                            "sensitivity_level": {
+                                              "type": "string",
+                                              "enum": ["high","medium","low","none"]
+                                            },
+                                            "permission": {
+                                              "type": "array",
+                                              "minItems": 1,
+                                              "maxItems": 15,
+                                              "uniqueItems": true,
+                                              "items": [
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            "permissionWithGrantOption": {
+                                              "type": "array",
+                                              "maxItems": 15,
+                                              "items": [
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                },
+                                                {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "perm": {
+                                                      "type": "string",
+                                                      "enum": ["ALL","SELECT","ALTER","DROP","DELETE","INSERT","DESCRIBE","CREATE_DATABASE","CREATE_TABLE","DATA_LOCATION_ACCESS","CREATE_TAG","ALTER_TAG","DELETE_TAG","DESCRIBE_TAG","ASSOCIATE_TAG"]
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "perm"
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "required": [
+                                            "sensitivity_level",
+                                            "permission",
+                                            "permissionWithGrantOption"
+                                          ]
+                                        }
+                                      },
+                                      "required": [
+                                        "label",
+                                        "permissions"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "role"
+                                  ]
+                                }
+                              ]
+                            }
+                          },
+                          "required": [
+                            "roles"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "bucket_label",
+                    "sensitivity",
+                    "policy"
+                  ]
+                }
+              ]
+            }
+          },
+          "required": [
+            "table"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "database",
+    "grants"
+  ]
+}
