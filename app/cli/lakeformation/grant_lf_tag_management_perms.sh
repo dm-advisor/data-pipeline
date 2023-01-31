@@ -1,0 +1,80 @@
+#!/bin/bash
+##################################################################################################
+# This script can be used to grant Lake Formation tag management permissions
+# to lake admin roles for LF-tags. Granting such permissions to a principal
+# allows the principal to associate tags with resources.
+#
+# While coding/editing the CSV input file be sure to use Linux line feed (LF) instead of
+# Windows (CRLF).
+#
+# To verify that permissions where granted properly, copy and paste the command
+# below into a text editor. Then, remove the hash marks (#), replace strings surrounded by
+# < > brackets with real values, copy and paste the command into a terminal session and execute it:
+# aws lakeformation list-permissions --principal '{"DataLakePrincipalIdentifier":"<role-arn>"}' \
+# --resource '{"LFTagPolicy":{"ResourceType":"Table",
+# "Expression":[{"TagKey": "<lf-tag-key1>","TagValues": ["<lf-tag-value>", "<lf-tag-value>", ...]},
+# {"TagKey":"<lf-tag-key2>","TagValues":[<lf-tag-value>", "<lf-tag-value>", ...]}]}}'
+##################################################################################################
+source ./../env_conf.sh || { echo "Unable to source env_conf.sh"; exit 1; }
+SCRIPT_NAME=$(basename "$0")
+
+if [ "$#" -ne 2 ]; then
+  printf "ERROR: Wrong number of arguments - required 2 arguments; received %s" "$#"
+  printf "\nUsage: %s environment path/csv-input-file-name" "$SCRIPT_NAME"
+  printf "\nExample: %s dev ../../config/lakeformation/grants/lf_tag_management.csv" "$SCRIPT_NAME"
+  exit 1
+fi
+
+environment=${1}
+info "environment is set to: ${environment}"
+input=${2}
+info "Input file name is set to: ${input}"
+
+if [ ! -f "${input}" ]; then
+    error "Unable to locate CSV input file: ${input}"
+fi
+
+json_template="../../config/lakeformation/grants/grant_lf_tag_management_template.json"
+
+if [ ! -f "${json_template}" ]; then
+    error "Unable to locate the required JSON template file: ${json_template}"
+fi
+
+processed_count=0
+
+# Read the CSV file and iterate through records one at a time.
+while IFS='|' read -r env role_name lf_tag_key lf_tag_values perms perms_with_grant
+do
+  if [ "${env}" = "${environment}" ]; then
+    # Obtain AWS role ARN using role_name.
+    role_arn=$(aws iam list-roles | \
+        jq -r --arg ROLENAME "${role_name}" '.Roles[] | select (.RoleName == $ROLENAME)' | jq -r .Arn)
+    [[ -z "${role_arn}" ]] && error "Unable to determine AWS role ARN for role name: ${role_name}.
+        Make sure security token has not expired!"
+
+    info "Now granting ${perms} to role ARN: ${role_arn},"
+    info "using tag key: ${lf_tag_key} and tag values: ${lf_tag_values}"
+
+    # Substitute the variables in the JSON template with actual values from CSV file.
+    temp_v=$(sed -e "s!\${PRINCIPAL}!${role_arn}!" \
+                -e "s/\${LF_TAG_KEY}/${lf_tag_key}/" \
+                -e "s/\${LF_TAG_VALUES}/${lf_tag_values}/" \
+                -e "s/\${PERMS}/${perms}/" \
+                -e "s/\${PERMS_WITH_GRANT}/${perms_with_grant}/" \
+                "${json_template}") \
+               || error "Parameter substitution in JSON template file failed!"
+
+    aws lakeformation grant-permissions --cli-input-json \
+      "${temp_v}" \
+      || error "aws lakeformation grant-permissions command failed!"
+
+      ((processed_count=processed_count+1))
+  fi
+done <<< "$(tail -n +2 < "${input}" | grep  -v '^#')" # Feed the csv file to the while loop and skip the header and commented lines.
+
+if (( processed_count  == 0 )); then
+  error "No action performed! Either the input csv file is empty or none of the values defined in the ENV column
+  matches the environment=${environment} that is specified as the command line argument."
+fi
+
+info "Script completed successfully!"
