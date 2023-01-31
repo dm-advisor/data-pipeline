@@ -1,0 +1,26 @@
+{
+    "Principal": {
+        "DataLakePrincipalIdentifier": "${PRINCIPAL}"
+    },
+    "Resource": {
+        "LFTagPolicy": {
+            "ResourceType": "TABLE",
+            "Expression": [
+              {
+                "TagKey": "${LF_TAG_KEY1}",
+                "TagValues": ${LF_TAG_VALUES1}
+              },
+              {
+                "TagKey": "${LF_TAG_KEY2}",
+                "TagValues": ${LF_TAG_VALUES2}
+              },
+              {
+                "TagKey": "${LF_TAG_KEY3}",
+                "TagValues": ${LF_TAG_VALUES3}
+              }
+            ]
+          }
+    },
+    "Permissions": ${PERMS},
+    "PermissionsWithGrantOption": ${PERMS_WITH_GRANT}
+}
