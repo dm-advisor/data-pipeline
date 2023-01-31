@@ -3,8 +3,9 @@
         "DataLakePrincipalIdentifier": "${PRINCIPAL}"
     },
     "Resource": {
-        "DataLocation": {
-            "ResourceArn": "${RESOURCE_ARN}"
+        "LFTag": {
+            "TagKey": "${LF_TAG_KEY}",
+            "TagValues": ${LF_TAG_VALUES}
         }
     },
     "Permissions": ${PERMS},
