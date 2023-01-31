@@ -1,0 +1,14 @@
+{
+    "Principal": {
+        "DataLakePrincipalIdentifier": "${PRINCIPAL}"
+    },
+    "Resource": {
+        "DataCellsFilter": {
+            "DatabaseName": "${DB_NAME}",
+            "TableName": "${TABLE_NAME}",
+            "Name": "${FILTER_NAME}"
+          }
+    },
+    "Permissions": ${PERMS},
+    "PermissionsWithGrantOption": ${PERMS_WITH_GRANT}
+}
