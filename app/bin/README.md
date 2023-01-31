@@ -5,7 +5,7 @@ permissions for each Athena database.
 1. Module app.py: Creates Athena databases and tables in the data lake along with their supporting
 S3 folders. In addition, the program detects structure changes to existing tables automatically and drops and 
 recreates the tables. Moreover, it reloads partitions if the recreated table is partitioned.
-2. Module manage_table_perms.py: Grants or revokes AWS Lake Formation permissions.
+2. Module manage_table_perms.py: Grants or revokes AWS Lake Formation permissions on named catalog resources. For managing access using Lake Formation Tag-based access control (TBAC) and data cells filters refer to the various grant scripts in app/cli/lakeformation directory. 
 3. Module config_validator.py: Validates the various JSON configuration files against predefined JSON schemas.
 For further information refer to "Validating the JSON configuration files" section in:
  [app/config/README.md](../config/README.md)
