@@ -1,0 +1,16 @@
+{
+  "TableData":
+        {
+            "TableCatalogId": "${ACCOUNT}",
+            "DatabaseName": "${DB_NAME}",
+            "TableName": "${TABLE_NAME}",
+            "Name": "${FILTER_NAME}",
+            "RowFilter": {
+                "FilterExpression": ${FILTER_EXPRESSION}
+            },
+            "ColumnNames": [],
+            "ColumnWildcard": {
+                "ExcludedColumnNames": ${EXCLUDED_COLUMNS}
+            }
+        }
+}
