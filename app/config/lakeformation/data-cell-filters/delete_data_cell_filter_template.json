@@ -1,0 +1,6 @@
+{
+    "TableCatalogId": "${ACCOUNT}",
+    "DatabaseName": "${DB_NAME}",
+    "TableName": "${TABLE_NAME}",
+    "Name": "${FILTER_NAME}"
+}
