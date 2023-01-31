@@ -20,34 +20,31 @@ For example, export branchEnv=dev
 ### Usage Info
 Following is the usage information for the app.py module, which can also be obtained by issuing
 the following command in app/bin directory in a terminal: python app.py --help. Optional arguments
-are denoted by square brackets [] in the usage message. Permissible values are denoted by curly brackets {}.
+are denoted by square brackets [] in the usage message. Permissible values are denoted by curly braces {}.
 ```
-usage: app.py [-h] [-o OBJ_RECREATE_FILE] [-r {us-west-1,us-east-1,us-east-2}] [-l {debug,error,critical,info}] product_name app_config_file
+usage: app.py [-h] [-r {us-west-1,us-east-1,us-east-2}] [-l {debug,error,critical,info}] product_name app_config_file
 
 A program to provision application resources (s3 bucket folders, database, tables/views) for a project/subject area. Before executing this program, be sure to 'export branchEnv=<env>' where <env> is the target environment (e.g., dev,
 qa, uat or prod).
 
 positional arguments:
-  product_name          Product for which to deploy resources (e.g., rdms).
+  product_name          Product/application for which to deploy resources (e.g., rdms).
   app_config_file       Prefix of the application configuration JSON file stored in S3 (e.g., config/config.json).
 
 optional arguments:
-  -h, --help            show this help message and exit
-  -o OBJ_RECREATE_FILE, --obj_recreate_file OBJ_RECREATE_FILE
-                        Prefix and name of the Athena object recreation JSON file stored in S3. If not specified, the program uses config/obj_recreate.json file, by default.
+  -h, --help            Shows this help message and exits.
   -r {us-west-1,us-east-1,us-east-2}, --region {us-west-1,us-east-1,us-east-2}
                         AWS region in which to execute this program.
   -l {debug,error,critical,info}, --logger_level {debug,error,critical,info}
                         Desired level of logging.
 ```
 ### Execution Logs
-Log messages for each execution of the app.py program are captured in /rdms/{env}/log CloudWatch log group, where
-{env} is one of dev, qa, uat or prod. Each execution has its own unique log file name: app.py_{date}-{time}, where 
+Log messages for each execution of the app.py program are captured in /{product-name}/{env}/log CloudWatch log group, where {product-name} is the product/application name and {env} is one of dev, qa, uat or prod. Each execution has its own unique log file name: app.py_{date}-{time} in aws CloudWatch, where 
 {date}-{time} signify the date and time of the program execution. 
 
 As shown in the Usage Info section, the level of logging can be changed by providing the --logger_level or -l 
 command line option.
-## manage_table_perms.py (deprecated)
+## manage_table_perms.py
 The program expects the branchEnv environment variable to be set to one of the following values:
 - dev, qa, uat or prod
 
@@ -58,7 +55,7 @@ For example, export branchEnv=dev
 Following is the usage information for the manage_table_perms.py module, which can also be
 obtained by issuing the following command in a terminal: python manage_table_perms.py --help.
 Optional arguments are denoted by square brackets [] in the usage message. Permissible values
-are denoted by curly brackets {}.
+are denoted by curly braces {}.
 ```
 usage: manage_table_perms.py [-h] [-p PREFIX] [-s SUFFIX] [-r {us-west-1,us-east-1,us-east-2}] [-l {debug,error,critical,info}] {grant,revoke} product bucket_label app_config_file perm_config_file
 
@@ -66,7 +63,7 @@ A program to manage Lake Formation permissions on Athena tables. Before executin
 
 positional arguments:
   {grant,revoke}        Mode in which you want to manage Lake Formation permissions (e.g., grant or revoke).
-  product               Product for which to manage Lake Formation permissions (e.g., sdap).
+  product               Product for which to manage Lake Formation permissions (e.g., rdms).
   bucket_label          S3 Bucket label for the bucket in which the configuration JSON files are stored (e.g., app).
   app_config_file       Full path/name of the application configuration JSON file in S3 (e.g., config/config.json).
   perm_config_file      Full path/name of the permissions configuration JSON file in S3 (e.g., config/config_perm.json).
@@ -74,7 +71,7 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   -p PREFIX, --prefix PREFIX
-                        Prefix for use in calls to lf_perms_helper.get_table_name() method to limit the list of table namesreturned to a set that begins with the provided prefix.
+                        Prefix for use in calls to lf_perms_helper.get_table_name() method to limit the list of table names returned to a set that begins with the provided prefix.
   -s SUFFIX, --suffix SUFFIX
                         Suffix for use in calls to lf_perms_helper.get_table_name() method to limit the list of table names returned to a set that ends with the provided suffix.
   -r {us-west-1,us-east-1,us-east-2}, --region {us-west-1,us-east-1,us-east-2}
@@ -83,13 +80,12 @@ optional arguments:
                         Desired level of logging.
 ```
 ### Execution Logs
-Log messages for each execution of the manage_table_perms.py program are captured in /rdms/{env}/log CloudWatch log group, where
-{env} is one of dev, qa, uat or prod. Each execution has its own unique log file name: manage_table_perms.py_{date}-{time}, where 
-{date}-{time} signify the date and time of the program execution. 
+Log messages for each execution of the manage_table_perms.py program are captured in /{product-name}/{env}/log CloudWatch log group, where {product-name} is the product/application name and {env} is one of dev, qa, uat or prod. Each execution has its own unique log file name: app.py_{date}-{time} in AWS CloudWatch, where 
+{date}-{time} signify the date and time of the program execution.
 
 As shown in the Usage Info section, the level of logging can be changed by providing the --logger_level or -l 
 command line option.
-### Important Note: 
+### Important Note About manage_table_perms.py: 
 app.py and manage_table_perms.py programs work in tandem in that the list of
 tables in the app.py configuration file (i.e., *_config.json) must match the list of tables in the
 manage_table_perms.py configuration file (i.e., *_config_perm.json). Otherwise, an error similar
