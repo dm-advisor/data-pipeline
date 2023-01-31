@@ -17,21 +17,6 @@ The program expects the branchEnv environment variable to be set to one of the f
 You should export the above environment variable in the terminal prior to executing the program.
 For example, export branchEnv=dev
 
-### Deprecated Feature
-To drop and recreate any existing Athena objects (tables or views), be sure to populate the database 
-names and table names in the file that is passed as app_config_file command line argument (<span style="color:yellow">this feature is deprecated</span>).
-The program has been enhanced to compare each existing table's metadata against the table's 
-DDL script that is stored in S3 and automatically detect if an existing table's structure has changed. Upon 
-detecting changes, the program drops and recreates the table. The program obtains the existing tables'
-metadata using get_tables Glue boto3 API call, which is similar to the following CLI command:
-
-- aws glue get-tables --database-name <database-name> 
-
-You can further filter the results from the above command using jq. Below is a sample command that filters on 
-user_query table in the perf_test database:
-
-- aws glue get-tables --database-name <span style="color:red">perf_test</span> | jq -r '.TableList[] | select (.Name | endswith("<span style="color:red">user_query</span>"))'
-
 ### Usage Info
 Following is the usage information for the app.py module, which can also be obtained by issuing
 the following command in app/bin directory in a terminal: python app.py --help. Optional arguments
