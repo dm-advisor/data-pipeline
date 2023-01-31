@@ -1,0 +1,12 @@
+{
+    "Principal": {
+        "DataLakePrincipalIdentifier": "${PRINCIPAL}"
+    },
+    "Resource": {
+        "DataLocation": {
+            "ResourceArn": "${RESOURCE_ARN}"
+        }
+    },
+    "Permissions": ${PERMS},
+    "PermissionsWithGrantOption": ${PERMS_WITH_GRANT}
+}
