@@ -1,5 +1,5 @@
 # data-pipeline
-A repository of sample code to conceptualize a cloud-based data pipeline.
+A repository of sample code to conceptualize a cloud-based data management pipeline.
 The primary puprose of this repository is to provide sample code for implementating a data pipeline to ingest, tranform and curate data into a data lake for BI reporting and analytics consumption using the Amazon Web Services (AWS) native services.
 
 A depicted in the diagram below, the sample use case involves the following processes:
@@ -10,7 +10,8 @@ A depicted in the diagram below, the sample use case involves the following proc
 ![data-pipeline](https://user-images.githubusercontent.com/123999086/215606241-d0526b38-c795-4d93-9ef5-a65aea1807ac.jpg)
 
 ## Scope of POC
-This proof-of-concept involves creating an ETL pipeline for ingesting the de-identified student enrollment campus files and making the data available for access through SQL queries.
+This proof-of-concept involves creating an ETL pipeline for ingesting fictitious student enrollment data. It is assumed that 
+source data is provided in the form of ASCII text files in comma spearate (CSV) format. The ultimate goal of the POC is to make the data available for access through SQL queries.
 Following is the list of steps included in the pipeline:
 1. An AWS Lambda function that detects when a file is placed in the landing zone and moves the file under the corresponding folder in the incoming zone (sdap-poc-incoming s3 bucket).
 2. Five Athena tables that represent the incoming data in full fidelity as provided by campuses. Each of the tables represents the structure of each campus file type: 3rd week, EOT, summer 3rd week, summer EOT and residents.
