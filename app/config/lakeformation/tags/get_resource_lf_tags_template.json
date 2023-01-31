@@ -1,0 +1,9 @@
+{
+    "Resource": {
+        "Table": {
+            "DatabaseName": "${DB_NAME}",
+            "Name": "${TABLE_NAME}"
+        }
+    },
+    "ShowAssignedLFTags": false
+}
